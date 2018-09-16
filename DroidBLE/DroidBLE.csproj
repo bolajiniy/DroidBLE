@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Crosslight.Xamarin.Build.Download.25.3.1\build\Crosslight.Xamarin.Build.Download.props" Condition="Exists('..\packages\Crosslight.Xamarin.Build.Download.25.3.1\build\Crosslight.Xamarin.Build.Download.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -16,8 +17,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
@@ -73,27 +73,33 @@
     <Reference Include="Xamarin.Android.Arch.Lifecycle.Runtime, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Android.Arch.Lifecycle.Runtime.1.0.3.1\lib\MonoAndroid80\Xamarin.Android.Arch.Lifecycle.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Android.Support.Annotations, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Android.Support.Annotations.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.Annotations.dll</HintPath>
+    <Reference Include="Xamarin.Android.Support.Annotations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=71f3e3261ac778b5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crosslight.Xamarin.Android.Support.Annotations.25.3.1\lib\MonoAndroid70\Xamarin.Android.Support.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Android.Support.Compat, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Android.Support.Compat.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.Compat.dll</HintPath>
+    <Reference Include="Xamarin.Android.Support.Compat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=71f3e3261ac778b5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crosslight.Xamarin.Android.Support.Compat.25.3.1\lib\MonoAndroid70\Xamarin.Android.Support.Compat.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Android.Support.Core.Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Android.Support.Core.Utils.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.Core.Utils.dll</HintPath>
+    <Reference Include="Xamarin.Android.Support.Core.Utils, Version=1.0.0.0, Culture=neutral, PublicKeyToken=71f3e3261ac778b5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crosslight.Xamarin.Android.Support.Core.Utils.25.3.1\lib\MonoAndroid70\Xamarin.Android.Support.Core.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.Media.Compat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=71f3e3261ac778b5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crosslight.Xamarin.Android.Support.Media.Compat.25.3.1\lib\MonoAndroid70\Xamarin.Android.Support.Media.Compat.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLELeScanCallBack.cs" />
     <Compile Include="BleReceiver.cs" />
     <Compile Include="BLEScanCallback.cs" />
+    <Compile Include="LogManager.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
@@ -112,6 +118,9 @@
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="THIRD-PARTY-NOTICES.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -124,12 +133,23 @@
     <Error Condition="!Exists('..\packages\Xamarin.Android.Arch.Lifecycle.Runtime.1.0.3.1\build\MonoAndroid80\Xamarin.Android.Arch.Lifecycle.Runtime.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Arch.Lifecycle.Runtime.1.0.3.1\build\MonoAndroid80\Xamarin.Android.Arch.Lifecycle.Runtime.targets'))" />
     <Error Condition="!Exists('..\packages\Xamarin.Android.Support.Compat.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Compat.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.Compat.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Compat.targets'))" />
     <Error Condition="!Exists('..\packages\Xamarin.Android.Support.Core.Utils.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Core.Utils.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.Core.Utils.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Core.Utils.targets'))" />
+    <Error Condition="!Exists('..\packages\Crosslight.Xamarin.Android.Support.Annotations.25.3.1\build\MonoAndroid70\Crosslight.Xamarin.Android.Support.Annotations.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Crosslight.Xamarin.Android.Support.Annotations.25.3.1\build\MonoAndroid70\Crosslight.Xamarin.Android.Support.Annotations.targets'))" />
+    <Error Condition="!Exists('..\packages\Crosslight.Xamarin.Build.Download.25.3.1\build\Crosslight.Xamarin.Build.Download.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Crosslight.Xamarin.Build.Download.25.3.1\build\Crosslight.Xamarin.Build.Download.props'))" />
+    <Error Condition="!Exists('..\packages\Crosslight.Xamarin.Build.Download.25.3.1\build\Crosslight.Xamarin.Build.Download.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Crosslight.Xamarin.Build.Download.25.3.1\build\Crosslight.Xamarin.Build.Download.targets'))" />
+    <Error Condition="!Exists('..\packages\Crosslight.Xamarin.Android.Support.Compat.25.3.1\build\MonoAndroid70\Crosslight.Xamarin.Android.Support.Compat.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Crosslight.Xamarin.Android.Support.Compat.25.3.1\build\MonoAndroid70\Crosslight.Xamarin.Android.Support.Compat.targets'))" />
+    <Error Condition="!Exists('..\packages\Crosslight.Xamarin.Android.Support.Core.Utils.25.3.1\build\MonoAndroid70\Crosslight.Xamarin.Android.Support.Core.Utils.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Crosslight.Xamarin.Android.Support.Core.Utils.25.3.1\build\MonoAndroid70\Crosslight.Xamarin.Android.Support.Core.Utils.targets'))" />
+    <Error Condition="!Exists('..\packages\Crosslight.Xamarin.Android.Support.Media.Compat.25.3.1\build\MonoAndroid70\Crosslight.Xamarin.Android.Support.Media.Compat.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Crosslight.Xamarin.Android.Support.Media.Compat.25.3.1\build\MonoAndroid70\Crosslight.Xamarin.Android.Support.Media.Compat.targets'))" />
   </Target>
   <Import Project="..\packages\Xamarin.Android.Arch.Core.Common.1.0.0.1\build\MonoAndroid80\Xamarin.Android.Arch.Core.Common.targets" Condition="Exists('..\packages\Xamarin.Android.Arch.Core.Common.1.0.0.1\build\MonoAndroid80\Xamarin.Android.Arch.Core.Common.targets')" />
   <Import Project="..\packages\Xamarin.Android.Arch.Lifecycle.Common.1.0.3.1\build\MonoAndroid80\Xamarin.Android.Arch.Lifecycle.Common.targets" Condition="Exists('..\packages\Xamarin.Android.Arch.Lifecycle.Common.1.0.3.1\build\MonoAndroid80\Xamarin.Android.Arch.Lifecycle.Common.targets')" />
   <Import Project="..\packages\Xamarin.Android.Arch.Lifecycle.Runtime.1.0.3.1\build\MonoAndroid80\Xamarin.Android.Arch.Lifecycle.Runtime.targets" Condition="Exists('..\packages\Xamarin.Android.Arch.Lifecycle.Runtime.1.0.3.1\build\MonoAndroid80\Xamarin.Android.Arch.Lifecycle.Runtime.targets')" />
   <Import Project="..\packages\Xamarin.Android.Support.Compat.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Compat.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Compat.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Compat.targets')" />
   <Import Project="..\packages\Xamarin.Android.Support.Core.Utils.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Core.Utils.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Core.Utils.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Core.Utils.targets')" />
+  <Import Project="..\packages\Crosslight.Xamarin.Android.Support.Annotations.25.3.1\build\MonoAndroid70\Crosslight.Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Crosslight.Xamarin.Android.Support.Annotations.25.3.1\build\MonoAndroid70\Crosslight.Xamarin.Android.Support.Annotations.targets')" />
+  <Import Project="..\packages\Crosslight.Xamarin.Build.Download.25.3.1\build\Crosslight.Xamarin.Build.Download.targets" Condition="Exists('..\packages\Crosslight.Xamarin.Build.Download.25.3.1\build\Crosslight.Xamarin.Build.Download.targets')" />
+  <Import Project="..\packages\Crosslight.Xamarin.Android.Support.Compat.25.3.1\build\MonoAndroid70\Crosslight.Xamarin.Android.Support.Compat.targets" Condition="Exists('..\packages\Crosslight.Xamarin.Android.Support.Compat.25.3.1\build\MonoAndroid70\Crosslight.Xamarin.Android.Support.Compat.targets')" />
+  <Import Project="..\packages\Crosslight.Xamarin.Android.Support.Core.Utils.25.3.1\build\MonoAndroid70\Crosslight.Xamarin.Android.Support.Core.Utils.targets" Condition="Exists('..\packages\Crosslight.Xamarin.Android.Support.Core.Utils.25.3.1\build\MonoAndroid70\Crosslight.Xamarin.Android.Support.Core.Utils.targets')" />
+  <Import Project="..\packages\Crosslight.Xamarin.Android.Support.Media.Compat.25.3.1\build\MonoAndroid70\Crosslight.Xamarin.Android.Support.Media.Compat.targets" Condition="Exists('..\packages\Crosslight.Xamarin.Android.Support.Media.Compat.25.3.1\build\MonoAndroid70\Crosslight.Xamarin.Android.Support.Media.Compat.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
 		Other similar extension points exist, see Microsoft.Common.targets.
 		<Target Name="BeforeBuild">
